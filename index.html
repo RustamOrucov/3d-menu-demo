@@ -10,81 +10,42 @@
       margin: 0;
       height: 100%;
       background: #f5f5f5;
-      font-family: sans-serif;
-    }
-    #image-container, #model-container {
-      width: 100vw;
-      height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       flex-direction: column;
-    }
-    #model-container {
-      display: none;
     }
     #pizza-image {
       width: 80%;
       max-width: 300px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    #start-button, #ar-button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      background-color: #ff5722;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
       cursor: pointer;
     }
     model-viewer {
-      width: 100vw;
-      height: 100vh;
-    }
-    #ar-button {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+      display: none;
     }
   </style>
 </head>
 <body>
 
-<div id="image-container">
-  <img id="pizza-image" src="pizza.jpg" alt="Pizza">
-  <button id="start-button">3D Göstər</button>
-</div>
+<img id="pizza-image" src="pizza.jpg" alt="Pizza">
 
-<div id="model-container">
-  <model-viewer 
-    id="model"
-    src="pizza.glb"
-    ar
-    ar-modes="scene-viewer webxr quick-look"
-    ar-placement="floor"
-    camera-controls
-    auto-rotate
-    shadow-intensity="1"
-    exposure="1.0"
-    alt="3D Pizza Modeli">
-  </model-viewer>
-  <button id="ar-button">AR ilə bax</button>
-</div>
+<!-- Gizli model-viewer, sadece AR'yi tetiklemek için -->
+<model-viewer 
+  id="model"
+  src="pizza.glb"
+  ar
+  ar-modes="scene-viewer webxr quick-look"
+  ar-placement="floor"
+  alt="3D Pizza Modeli">
+</model-viewer>
 
 <script>
-  const startButton = document.getElementById('start-button');
-  const arButton = document.getElementById('ar-button');
   const modelViewer = document.getElementById('model');
+  const pizzaImage = document.getElementById('pizza-image');
 
-  startButton.addEventListener('click', () => {
-    document.getElementById('image-container').style.display = 'none';
-    document.getElementById('model-container').style.display = 'block';
-  });
-
-  arButton.addEventListener('click', () => {
+  pizzaImage.addEventListener('click', () => {
     modelViewer.activateAR();
   });
 </script>
