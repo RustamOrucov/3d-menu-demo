@@ -2,57 +2,58 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
+  <title>Pizza AR</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Menü Demo</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f5f5f5;
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
     }
-    .menu-item {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 16px;
-      margin-bottom: 20px;
+    model-viewer {
+      width: 100vw;
+      height: 100vh;
     }
-    .menu-item img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-    .menu-item h3 {
-      margin: 10px 0;
-      color:black;
-      text-align: center;
-    }
-    .menu-item a {
-      display: inline-block;
-      padding: 10px 16px;
+    #ar-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 24px;
+      background-color: #ff5722;
       color: white;
-      text-decoration: none;
+      border: none;
       border-radius: 8px;
-      margin-top: 10px;
+      font-size: 16px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <h1>🍽️ 3D Menü Demo</h1>
+<model-viewer 
+  id="model"
+  src="pizza.glb"
+  ar
+  ar-modes="scene-viewer webxr quick-look"
+  camera-controls
+  auto-rotate
+  shadow-intensity="1"
+  exposure="1.0"
+  alt="3D Pizza Modeli">
+</model-viewer>
 
-  <div class="menu-item">
-     <a href="pizza.html">
-    <img src="pizza.jpg" alt="Pizza">
-    <h3>BURGER</h3>
-   </a>
-  </div>
+<button id="ar-button">AR ile Görüntüle</button>
 
-<!--   <div class="menu-item">
-    <a href="cola.html">
-    <img src="images/cola.jpg" alt="Cola">
-    <h3>Cola</h3>
-    </a>
-  </div> -->
+<script>
+  const modelViewer = document.getElementById('model');
+  const arButton = document.getElementById('ar-button');
+
+  arButton.addEventListener('click', () => {
+    modelViewer.activateAR();
+  });
+</script>
 
 </body>
 </html>
